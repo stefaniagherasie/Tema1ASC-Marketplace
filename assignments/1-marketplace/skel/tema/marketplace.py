@@ -21,15 +21,16 @@ class Marketplace:
         """
 
         self.queue_size_per_producer = queue_size_per_producer
-        self.id_count = 0
+        self.prod_count = 0
+        self.cart_count = 0
 
     def register_producer(self):
         """
         Returns an id for the producer that calls this.
         """
 
-        self.id_count = self.id_count + 1
-        return self.id_count
+        self.prod_count = self.prod_count + 1
+        return self.prod_count
 
     def publish(self, producer_id, product):
         """
@@ -51,7 +52,8 @@ class Marketplace:
 
         :returns an int representing the cart_id
         """
-        pass
+        self.cart_count = self.cart_count + 1
+        return self.cart_count
 
     def add_to_cart(self, cart_id, product):
         """
