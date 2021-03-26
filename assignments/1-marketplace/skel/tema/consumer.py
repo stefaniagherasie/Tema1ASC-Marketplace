@@ -40,7 +40,6 @@ class Consumer(Thread):
 
     def add_product(self, cart_id, product, quantity):
         for i in range(quantity):
-
             temp = self.marketplace.add_to_cart(cart_id, product)
             while temp is False:
                 time.sleep(self.retry_wait_time)

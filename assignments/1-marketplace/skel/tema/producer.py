@@ -40,7 +40,6 @@ class Producer(Thread):
         # self.name = kwargs["name"]
         self.producer_id = self.marketplace.register_producer()
 
-
     def run(self):
         while True:
             for task in self.products:
