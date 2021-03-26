@@ -89,6 +89,7 @@ class Marketplace:
                 self.carts[cart_id].append(product)
                 #print(self.carts[1])
                 self.products[key].remove(product)
+
                 return True
         return False
 
