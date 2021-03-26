@@ -7,6 +7,7 @@ March 2021
 """
 from threading import Lock
 
+
 class Marketplace:
     """
     Class that represents the Marketplace. It's the central part of the implementation.
@@ -34,7 +35,6 @@ class Marketplace:
 
         self.prod_count = self.prod_count + 1
         self.products[self.prod_count] = []
-
         return self.prod_count
 
     def publish(self, producer_id, product):
@@ -51,10 +51,8 @@ class Marketplace:
         """
 
         temp = self.products[producer_id]
-        if len(temp) < self.queue_size_per_producer:
-            print(self.products[producer_id])
+        if len(temp) <= self.queue_size_per_producer:
             self.products[producer_id].append(product)
-            print(self.products[producer_id])
             return True
 
         return False
@@ -85,11 +83,10 @@ class Marketplace:
 
         for key in self.products.keys():
             if product in self.products[key]:
-                #print(self.carts[1])
                 self.carts[cart_id].append(product)
-                #print(self.carts[1])
                 self.products[key].remove(product)
                 return True
+
         return False
 
     def remove_from_cart(self, cart_id, product):
@@ -107,7 +104,8 @@ class Marketplace:
             if product in self.products[key]:
                 self.carts[cart_id].remove(product)
                 self.products[key].append(product)
-                break
+                return True
+        return False
 
     def place_order(self, cart_id):
         """
@@ -118,7 +116,9 @@ class Marketplace:
         """
 
         order = self.carts[cart_id]
-
-        #print(order)
-        #self.carts.pop(cart_id)
+        # !!!!!!
+        for product in order:
+            print(product)
+        print()
+        self.carts.pop(cart_id)
         return order
