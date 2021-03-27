@@ -32,23 +32,29 @@ class Producer(Thread):
         @param kwargs: other arguments that are passed to the Thread's __init__()
         """
 
+        Thread.__init__(self, **kwargs)
         self.products = products
         self.marketplace = marketplace
         self.republish_wait_time = republish_wait_time
-        Thread.__init__(self, **kwargs)
-
         self.producer_id = self.marketplace.register_producer()
+
 
     def run(self):
         while True:
             for task in self.products:
+                # Get each product with quantity and making time
                 product = task[0]
                 quantity = task[1]
                 making_time = task[2]
 
-                for i in range(quantity):
+                # Put the product on the market
+                for _ in range(quantity):
                     temp = self.marketplace.publish(self.producer_id, product)
+
+                    # If the producer buffer is full, try again after a given time
                     while not temp:
                         time.sleep(self.republish_wait_time)
                         temp = self.marketplace.publish(self.producer_id, product)
+
+                    # Wait for the product to be made
                     time.sleep(making_time)

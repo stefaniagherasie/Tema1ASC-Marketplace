@@ -26,16 +26,20 @@ class Marketplace:
         self.cart_count = 0
 
         self.products = {}      # key: prod_id, value: list of products
-        self.carts = {}         # key: cart_id, value: list of products
+        self.carts = {}         # key: cart_id, value: list of (product, producer)
+        self.lock = Lock()
 
     def register_producer(self):
         """
         Returns an id for the producer that calls this.
         """
 
-        self.prod_count = self.prod_count + 1
-        self.products[self.prod_count] = []
-        return self.prod_count
+        with self.lock:
+            # Give the producer an id
+            self.prod_count = self.prod_count + 1
+            self.products[self.prod_count] = []
+            return self.prod_count
+
 
     def publish(self, producer_id, product):
         """
@@ -50,12 +54,15 @@ class Marketplace:
         :returns True or False. If the caller receives False, it should wait and then try again.
         """
 
-        temp = self.products[producer_id]
-        if len(temp) <= self.queue_size_per_producer:
+        tmp = self.products[producer_id]
+        if len(tmp) <= self.queue_size_per_producer:
+            # Add the product to the buffer, if there is space
             self.products[producer_id].append(product)
             return True
 
+        # If the buffer is full, make consumer wait and try later
         return False
+
 
     def new_cart(self):
         """
@@ -63,10 +70,12 @@ class Marketplace:
 
         :returns an int representing the cart_id
         """
-        self.cart_count = self.cart_count + 1
-        self.carts[self.cart_count] = []
+        with self.lock:
+            # Give the cart an id
+            self.cart_count = self.cart_count + 1
+            self.carts[self.cart_count] = []
+            return self.cart_count
 
-        return self.cart_count
 
     def add_to_cart(self, cart_id, product):
         """
@@ -81,12 +90,17 @@ class Marketplace:
         :returns True or False. If the caller receives False, it should wait and then try again
         """
 
-        for key in self.products.keys():
-            if product in self.products[key]:
-                self.carts[cart_id].append(product)
-                self.products[key].remove(product)
+        for producer_id in self.products:
+            if product in self.products[producer_id]:
+                # Find the product
+                tmp = (product, producer_id)
+
+                # Add the product to the cart and remove it from the producer list
+                self.carts[cart_id].append(tmp)
+                self.products[producer_id].remove(product)
                 return True
 
+        # If the product was not found, make consumer wait and try later
         return False
 
     def remove_from_cart(self, cart_id, product):
@@ -100,12 +114,17 @@ class Marketplace:
         :param product: the product to remove from cart
         """
 
-        for key in self.products.keys():
-            if product in self.products[key]:
-                self.carts[cart_id].remove(product)
-                self.products[key].append(product)
-                return True
-        return False
+        # Search in cart for the product
+        for tmp in self.carts[cart_id]:
+            current_prod = tmp[0]
+            producer_id = tmp[1]
+
+            if product == current_prod:
+                # Remove the product from the cart and add it to the producer list
+                self.carts[cart_id].remove(tmp)
+                self.products[producer_id].append(product)
+                return
+
 
     def place_order(self, cart_id):
         """
@@ -115,10 +134,12 @@ class Marketplace:
         :param cart_id: id cart
         """
 
-        order = self.carts[cart_id]
-        # !!!!!!
-        for product in order:
-            print(product)
-        print()
+        order = []
+        # From the list of product from the order
+        for product in self.carts[cart_id]:
+            order.append(product[0])
+
+        # Remove the cart from the carts list
         self.carts.pop(cart_id)
+
         return order

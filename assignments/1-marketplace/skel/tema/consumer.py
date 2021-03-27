@@ -33,32 +33,45 @@ class Consumer(Thread):
         :param kwargs: other arguments that are passed to the Thread's __init__()
         """
 
+        Thread.__init__(self, **kwargs)
         self.carts = carts
         self.marketplace = marketplace
         self.retry_wait_time = retry_wait_time
-        Thread.__init__(self, **kwargs)
+        self.name = kwargs['name']
+
 
 
     def add_product(self, cart_id, product, quantity):
-        for i in range(quantity):
+        """
+        Add a quantity of products to the cart
+
+        """
+        for _ in range(quantity):
             tmp = self.marketplace.add_to_cart(cart_id, product)
+
+            # If the product is not available, try again after a given time
             while tmp is False:
                 time.sleep(self.retry_wait_time)
                 tmp = self.marketplace.add_to_cart(cart_id, product)
 
 
     def remove_product(self, cart_id, product, quantity):
-        for i in range(quantity):
-            tmp = self.marketplace.remove_from_cart(cart_id, product)
-            while tmp is False:
-                time.sleep(self.retry_wait_time)
-                tmp = self.marketplace.remove_from_cart(cart_id, product)
+        """
+        Remove  quantity of products from the cart
+
+        """
+
+        for _ in range(quantity):
+            self.marketplace.remove_from_cart(cart_id, product)
+
 
     def run(self):
         for cart in self.carts:
+            # Add the cart to the marketplace
             cart_id = self.marketplace.new_cart()
 
             for request in cart:
+                # Get type of request(add or remove), product and quantity
                 order = request["type"]
                 product = request["product"]
                 quantity = request["quantity"]
@@ -68,4 +81,9 @@ class Consumer(Thread):
                 elif order == "remove":
                     self.remove_product(cart_id, product, quantity)
 
-            self.marketplace.place_order(cart_id)
+            # Get the final order as a list of Products
+            order = self.marketplace.place_order(cart_id)
+
+            # Print the order content in output format
+            for product in order:
+                print(self.name + " bought " + str(product))
