@@ -1,9 +1,7 @@
-# Arhitectura Sistemelor de calcul - Tema 1 - Marketplace, Martie 2021
-
-# Enunt
+#### Enunt
 http://ocw.cs.pub.ro/courses/asc/teme/tema1
 
-# Testare
+#### Testare
 
 
 * Folositi scriptul run_tests.sh.
