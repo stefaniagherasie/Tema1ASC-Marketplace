@@ -1,5 +1,4 @@
-#### Enunt
-http://ocw.cs.pub.ro/courses/asc/teme/tema1
+[Tema1 - Arhitectura Sistemelor de Calcul] 
 
 #### Testare
 
