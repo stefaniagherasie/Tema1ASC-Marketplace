@@ -1,10 +1,9 @@
 [Tema1 - Arhitectura Sistemelor de Calcul] 
 
-#### Testare
+#### TESTARE
 
 
-* Folositi scriptul run_tests.sh.
-* Schimbați înainte de a îl rula variabila PYTHON din interiorul lui cu path-ul de pe sistemul vostru
+* Folositi scriptul run_tests.sh (schimbați înainte de a îl rula variabila PYTHON din interiorul lui cu path-ul de pe sistemul vostru)
 * Fișierele de input și output-referință se află în directorul tests/
    * tot în acest director se generează și fisierul output al rulării temei folosind test.py
 * Pentru a verifica partea de code-style, trebuie să aveți instalat pylint
