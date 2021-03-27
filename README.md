@@ -1,4 +1,5 @@
-[Tema1 -Arhitectura Sistemelor de Calcul] Implementarea unui Marketplace pe baza problemei Multi Producer Multi Consumer. <br>
+[Tema1 -Arhitectura Sistemelor de Calcul] Implementarea unui Marketplace pe baza problemei Multi Producer Multi Consumer. 
+
 Enunt: https://ocw.cs.pub.ro/courses/asc/teme/tema1 <br>
 Schelet: https://bitbucket.org/ASC-admin/asc.git
 
@@ -6,9 +7,12 @@ Schelet: https://bitbucket.org/ASC-admin/asc.git
 
 Tema contine fisierele product.py, consumer.py, producer.py si marketplace.py, unde se
 afla implementarea Marketplace-ului cu două tipuri de produse (ceai și cafea) ce vor fi
-comercializate de către producători si achizitionate de consumatori.
+comercializate de către producători si achizitionate de consumatori. Acesta va fi intermediarul dintre producători și consumatori, prin el realizându-se achiziția de produse: producătorul (producer) va produce o anumită cantitate de produse de un anumit tip, cumpărătorul (consumer) va cumpăra o anumită cantitate de produse. De asemenea, Marketplace-ul va pune la dispoziția fiecărui cumpărător câte un coș de produse (cart) (acesta va fi folosit pentru rezervarea produselor care se doresc a fi cumpărate).
 	
-		Detaliile pentru testare se gasesc in 1-marketplace/README.md
+» Informatii despre testare se gasesc [aici](https://github.com/stefaniagherasie/Tema1ASC-Marketplace/tree/master/1-marketplace). <br>
+» Informații despre conținutul fișierelor de intrare/ ieșire se regăsesc [aici](https://bitbucket.org/ASC-admin/asc/src/master/assignments/1-marketplace/skel/test-gen/README_TESTS.md).
+<br>
+
 
 #### IMPLEMENTARE
 
