@@ -1,5 +1,5 @@
 # Tema1ASC-Marketplace
-[Tema1 -Arhitectura Sistemelor de Calcul] Implementarea unui Marketplace pe baza problemei Multi Producer Multi Consumer. 
+[Tema1 -Arhitectura Sistemelor de Calcul] Implementarea unui Marketplace pe baza problemei Multi Producer Multi Consumer.
 
 Enunt: https://ocw.cs.pub.ro/courses/asc/teme/tema1 <br>
 Schelet: https://bitbucket.org/ASC-admin/asc.git
