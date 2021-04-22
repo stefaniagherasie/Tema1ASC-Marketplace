@@ -4,7 +4,7 @@
 Enunt: https://ocw.cs.pub.ro/courses/asc/teme/tema1 <br>
 Schelet: https://bitbucket.org/ASC-admin/asc.git
 
-#### ORGANIZARE
+## Organizare
 
 Tema contine fisierele ```consumer.py```, ```producer.py``` si ```marketplace.py``` (In folderul ```1-marketplace/tema```). <br>
 Aici se afla implementarea Marketplace-ului cu două tipuri de produse (ceai și cafea) ce vor fi
@@ -12,10 +12,9 @@ comercializate de către producători si achizitionate de consumatori. Acesta va
 	
 » Informatii despre testare se gasesc [aici](https://github.com/stefaniagherasie/Tema1ASC-Marketplace/tree/master/1-marketplace). <br>
 » Informații despre conținutul fișierelor de intrare/ ieșire se regăsesc [aici](https://bitbucket.org/ASC-admin/asc/src/master/assignments/1-marketplace/skel/test-gen/README_TESTS.md).
-<br>
 
 
-#### IMPLEMENTARE
+## Implementare
 
 - Producatorul va produce intr-o bucla
 infinita lista de produse de care dispune. Pentru fiecare element din lista, se obtine
@@ -47,9 +46,9 @@ din cos si acesta devine disponibil din nou pe piata.
 	- In ```place_order``` se obtine lista
 de produse din cos.
 
-#### Bibliografie
+## Bibliografie
 
-https://ocw.cs.pub.ro/courses/asc/laboratoare/02 <br>
-https://ocw.cs.pub.ro/courses/asc/laboratoare/03
+1. https://ocw.cs.pub.ro/courses/asc/laboratoare/02
+2. https://ocw.cs.pub.ro/courses/asc/laboratoare/03
 
 
