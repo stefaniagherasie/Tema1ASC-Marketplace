@@ -50,5 +50,3 @@ de produse din cos.
 
 1. https://ocw.cs.pub.ro/courses/asc/laboratoare/02
 2. https://ocw.cs.pub.ro/courses/asc/laboratoare/03
-
-
